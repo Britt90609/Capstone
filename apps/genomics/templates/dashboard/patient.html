@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Patient Info</title>
+    {% load static %}
+    <meta name="viewport" content="width=device-width, initial-scale=1">    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+    <div class="wrapper">
+        <nav>
+            <div class="nav-wrapper">
+                <a class="left brand-logo hide-on-med-and-down">Welcome Doctor {{ request.session.last_name }}!</a>
+                <ul id="nav-mobile" class="right">
+                <li><a href="/dashboard">Dashboard</a></li>
+                <li><a href="/">Logout</a></li>
+                </ul>
+            </div>
+        </nav>
+        
+        <div class="row">
+            <div class="col s12 m4 l4 register">
+                <div class="row card scroll-box fullHeight">
+                    <div class="col sm11 m11 l11">
+                        <h4 class="center">Patient Info</h4>
+                        <p><span class="bold">Name:</span> {{ first_name }} {{ last_name }}</p>
+                        <p><span class="bold">DOB:</span> {{ DOB }} </p>
+                        <p><span class="bold">Gender:</span> {{ gender }}</p>
+                        <p><span class="bold">Diagnosis History:</span></p>
+                        <ul>
+                            {% for item in diagnosis_history %}
+                                <li>{{ item }}</li>
+                            {% endfor %}
+                        </ul>
+                        <p><span class="bold">Medications:</span></p>
+                        <ul>
+                            {% for med in medications %}
+                                <li>{{ med }}</li>
+                            {% endfor %}
+                        </ul>
+                        <p><span class="bold">Genome Mutations:</span></p>
+                        <ul>
+                            {% for mutation in genome_mutations %}
+                                <li>{{ mutation }}</li>
+                            {% endfor %}
+                        </ul>
+                        <p><span class="bold">Patient Pharmacy:</span> {{ pharmacy }}</p>
+                        <p><span class="bold">Pharmacy Address:</span> {{ pharmacy_address }}</p>
+                        <p><span class="bold">Pharmacy Phone:</span> {{ pharmacy_phone }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col s12 m4 l4">
+                <div class="row card scroll-box fullHeight">
+                    <div class="col sm11 m11 l11">
+                        <h4 class="center">Diagnosis</h4>
+                        <p><span class="bold">Symptoms:</span></p>
+                        <p>{{ symptoms }}</p>
+                        <p><span class="bold">Tests/Labs:</span></p>
+                        <p></p>
+                        <ul>
+                            {% for result in tests_labs %}
+                                <li>{{ result }}</li>
+                            {% endfor %}
+                        </ul>
+                        <p><span class="bold">Imaging:</span></p>
+                        <ul>
+                            {% for img in imaging %}
+                                <li>{{ img }}</li>
+                            {% endfor %}
+                        </ul>
+                        <p><span class="bold">Prognosis:</span> </p>
+                        <ul>
+                            {% for prog in prognosis %}
+                                <li>{{ prog }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col s12 m4 l4">
+                <div class="row card scroll-box fullHeight">
+                    <h4 class="center marginFix">Recommended Drugs</h4>
+                    <div class="center">
+                        <button class="waves-effect waves-light btn">Add Medications</button>
+                    </div>
+                    <ul>
+                        {% for med in rec_medications %}
+                            <div>
+                                <p class="col l2 medCheckBox">
+                                    <label>
+                                        <input type="checkbox" class="filled-in" />
+                                        <span></span>
+                                    </label>
+                                </p>
+                                <div class="col l10 card">
+                                    <p><span class="bold">Drug Name: {{ med.name }}</span></p>
+                                    <p><span class="bold">Dosage: {{ med.dosage }}</span> </p>
+                                    <p><span class="bold">Route: {{ med.route }}</span> </p>
+                                    <p><span class="bold">Contraindications:</span> </p>
+                                    <ul>
+                                        {% for item in med.contraindications %}
+                                            <li>{{ item }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                    <p><span class="bold">Don't Take With:</span> </p>
+                                    <ul>
+                                        {% for contraMedName in med.contraMedications %}
+                                            <li>{{ contraMedName }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

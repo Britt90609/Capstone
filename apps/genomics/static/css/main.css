@@ -1,0 +1,20 @@
+.medCheckBox {
+    display: inline-block;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.fullHeight {
+    height: 100vh;
+}
+
+.marginFix {
+    margin: 0;
+    padding: 20px 0;
+}
+
+.login {
+    color: #000;
+}
