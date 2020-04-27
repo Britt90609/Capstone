@@ -10,5 +10,5 @@ MarkupSafe==1.0
 pycparser==2.18
 pytz==2018.4
 six==1.11.0
-Werkzeug==0.14.1
+Werkzeug==0.15.3
 mysqlclient==1.4.6
